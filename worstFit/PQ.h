@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "item.h"
+#include "../item.h"
 
 //Defines
 #define Giga 1000000;
@@ -20,7 +20,7 @@ Item deletaItem(PQ* pq);
 
 void fixUp(PQ* pq, int filho);
 
-void insere(PQ* pq, Item disco);
+void inserePQ(PQ* pq, Item disco);
 
 void destruirHeap(PQ* pq);
 
@@ -32,6 +32,6 @@ Item novoDisco(int alteracao);
 
 void printHeap(PQ* );
 
-//fits
-void worst(int N, int* vet);
+//worstFit
+void worstFit(int N, int* vet);
 void sort(int N, int* vet);

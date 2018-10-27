@@ -1,6 +1,6 @@
 #include "PQ.h"
 
-void worst(int N, int* vet){
+void worstFit(int N, int* vet){
     //Cria heap
     PQ* pq = initPQ(N);
 
@@ -12,11 +12,11 @@ void worst(int N, int* vet){
         //deve-se criar um novo disco e devolver o anterior
         int aux = alteraDisco(atual, vet[i]);
         if( aux < 0){
-            insere(pq, atual);
-            insere(pq, novoDisco(vet[i]) );
+            inserePQ(pq, atual);
+            inserePQ(pq, novoDisco(vet[i]) );
         }else{
             //caso o novo montante de dados caiba basta atualizaro disco
-            insere(pq, aux);
+            inserePQ(pq, aux);
         }
     }
 
@@ -30,7 +30,7 @@ void sort(int N, int* vet){
     for(int i = 0; i < N; i++){
         //retira um disco para atualização
         printf("[%d] \n", vet[i]);
-        insere(pq, vet[i]);
+        inserePQ(pq, vet[i]);
     }
 
     //printHeap(pq);

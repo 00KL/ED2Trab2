@@ -46,7 +46,7 @@ void fixUp(PQ* pq, int filho){
     }
 }
 
-void insere(PQ* pq, Item disco){
+void inserePQ(PQ* pq, Item disco){
     pq->ulti++;
     pq->vet[pq->ulti] = disco;
 
