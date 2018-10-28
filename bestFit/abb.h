@@ -23,3 +23,8 @@ arv* retira_aux(arv* , int );//auxliar
 
 //fit
 void bestFit(int , int*);
+
+//boooooora
+arv* insereDados(arv* , int);
+arv* insercao(arv* , int );
+arv* reestrutura(arv*);

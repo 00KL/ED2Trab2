@@ -6,8 +6,10 @@ void bestFit(int N, int* vet){
     arv* arvore = cria_vazia();
 
     for(int i = 0; i < N; i++){
-        arvore = insereAbb(arvore, vet[i]/10000);
-        printf("[%d]\n", vet[i]/10000);
+        arvore = insercao(arvore, vet[i]);
+        printf("[%d]\n", vet[i]);
+        //imprime_crescente(arvore);
+        printf("\n\n" );
     }
 
 
