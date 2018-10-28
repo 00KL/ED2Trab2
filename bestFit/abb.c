@@ -28,100 +28,21 @@ arv* geraDisco(int x){
     return arvore;
 }
 
-arv* atualizaDisco(arv* arvore, int x){
-    arvore->info -= x;
-    return arvore;
-}
-
 arv* insercao(arv* arvore, int x){
-    int test = reincere;
-    salvaNoix = arvore;
-    arv* aux = insereDados(arvore, x);
-    if(reincere == test){
+
+    arv* aux = buscaBestFit(arvore, x);
+    if(aux == NULL){
+        //printf("test3\n");
         int ajuste = Giga;
         ajuste -= x;
-        return insereAbb(arvore, ajuste);}
-    // }else{
-    //     insercao(arvore, reincere);
-    // }
-    return aux;
-}
-
-
-
-arv* insereDados(arv* arvore, int x){
-    //Se o no foi vazio retorna NULL
-    if(arvore_vazia(arvore)) return NULL;
-    arv* saida;
-
-    if(!arvore_vazia(arvore->esq)){
-        saida = insereDados(arvore->esq, x);
-        if(saida == NULL){
-            if(x <= arvore->info){
-                //se o no atual puder armazenar ele é atualizado
-                //e retornado
-                arvore = atualizaDisco(arvore, x);
-
-                //reajusta a arvore
-                int aux = arvore->info;
-                retira(arvore, aux);
-                insereAbb(arvore, aux);
-
-
-                return arvore;
-            }
-            else{
-                saida = insereDados(arvore->dir,x);
-                if(saida == NULL){
-                    return saida;
-                }
-
-                arvore->dir = saida;
-                return arvore;
-            }
-        }else{
-            //Se a arvore que esta a esquerda do no atual
-            //puder armazenar em algum disco o valor em questão
-            //tal arvore é retornada
-            arvore->esq = saida;
-            return arvore;
-        }
+        return insereAbb(arvore, ajuste);
+    } else{
+        int resultado = aux->info;
+        arvore = retira_aux(arvore, resultado);
+        resultado -= x;
+        arvore = insereAbb(arvore, resultado);
     }
-
-    if(x <= arvore->info){
-        //se o no atual puder armazenar ele é atualizado
-        //e retornado
-        arvore = atualizaDisco(arvore, x);
-
-        if(!arvore_vazia(arvore->dir)){
-            // printf("eita carai\n\n");
-            // exit(1);
-
-            //reajusta a arvore
-            reincere = arvore->info;
-            arv* retorna = arvore->dir;
-            free(arvore);
-            printf("//////%d///////\n", retorna->info);
-
-            //insercao(salvaNoix, reincere);
-            return retorna;
-
-        }
-        return NULL;
-
-    }
-    else{
-        saida = insereDados(arvore->dir,x);
-        if(saida == NULL){
-            return saida;
-        }
-
-        arvore->dir = saida;
-        return arvore;
-    }
-
-    return NULL;
-
+    return arvore;
 }
 
 arv* insereAbb(arv* arvore, int x){
@@ -217,7 +138,31 @@ int busca(arv* arvore, int x){
     return 0;
 }
 
-/////////////////////////////RETIRA
+arv* buscaBestFit(arv* arvore, int x){
+    if(!arvore_vazia(arvore)){
+        //busca o bestfit a esquerda
+        arv* retorna = buscaBestFit(arvore->esq, x);
+
+        //caso n encontre se pergunta se o no atual é
+        //o bestFit
+        if(retorna == NULL){
+
+            if(x <= arvore->info){
+                return arvore;
+            }
+            //caso o no atual seja o best fit ele busca a direita
+            else{
+                return buscaBestFit(arvore->dir, x);
+            }
+        }
+
+        return retorna;
+
+    }
+
+    return NULL;
+}
+
 /////////////////////////////RETIRA
 arv* tira_folha(arv* folha){
     free(folha);
@@ -265,13 +210,10 @@ arv* reestrutura(arv* arvore){
             arvore->info = maior(arvore->esq);
             arvore->esq = retira_aux(arvore->esq, arvore->info);
 
-
             return arvore;
         }else{
             arvore->info = menor(arvore->dir);
-
             arvore->dir = retira_aux(arvore->dir, arvore->info);
-
 
             return arvore;
         }
@@ -306,22 +248,6 @@ arv* retira_aux(arv* arvore, int x){
         return NULL;
 
 }
-
-arv* retira(arv* arvore, int x){
-    if(busca(arvore, x)){
-        arvore = retira_aux(arvore, x);
-
-        imprime_crescente(arvore);
-        printf("\n\n" );
-
-        return arvore;
-    }
-
-    else{
-        printf("O elemento nao existe na arvore.");
-        return NULL;
-    }
-}
 ////////////////////RETIRA
 
 void libera(arv* arvore){
@@ -330,4 +256,18 @@ void libera(arv* arvore){
         libera(arvore->dir);
         free(arvore);
     }
+}
+
+
+//Quantidade de nos na arvore
+int quantDisco(arv* arvore){
+    if(!arvore_vazia(arvore)){
+        int cont = quantDisco(arvore->esq);
+        cont++;//arvore atual;
+        cont += quantDisco(arvore->dir);
+
+        return cont;
+    }
+
+    return 0;
 }

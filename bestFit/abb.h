@@ -28,3 +28,5 @@ void bestFit(int , int*);
 arv* insereDados(arv* , int);
 arv* insercao(arv* , int );
 arv* reestrutura(arv*);
+int quantDisco(arv*);
+arv* buscaBestFit(arv*, int);

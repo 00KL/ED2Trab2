@@ -6,16 +6,17 @@ void bestFit(int N, int* vet){
     arv* arvore = cria_vazia();
 
     for(int i = 0; i < N; i++){
+        //printf("[%d]\n", vet[i]);
         arvore = insercao(arvore, vet[i]);
-        printf("[%d]\n", vet[i]);
         //imprime_crescente(arvore);
-        printf("\n\n" );
+        //printf("\n\n" );
     }
 
+    printf("Quantidade de disco: %d\n", quantDisco(arvore) );
 
 
-    imprime_crescente(arvore);
-    printf("\n\n");
+    // imprime_crescente(arvore);
+    // printf("\n\n");
     //
     // if(busca(arvore, 6)){
     //     printf("6 esta na arvore.\n");

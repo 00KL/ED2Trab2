@@ -26,4 +26,6 @@ int main(int argc, char *argv[ ]){
     //worstFit(N, vet);
     bestFit(N, vet);
 
+
+
 }
