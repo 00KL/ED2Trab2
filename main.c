@@ -23,7 +23,7 @@ int main(int argc, char *argv[ ]){
     //
     // printf("\n\n");
 
-    //worstFit(N, vet);
+    worstFit(N, vet);
     bestFit(N, vet);
 
 

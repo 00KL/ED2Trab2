@@ -36,7 +36,8 @@ arv* insercao(arv* arvore, int x){
         int ajuste = Giga;
         ajuste -= x;
         return insereAbb(arvore, ajuste);
-    } else{
+    }
+    else{
         int resultado = aux->info;
         arvore = retira_aux(arvore, resultado);
         resultado -= x;
@@ -53,49 +54,15 @@ arv* insereAbb(arv* arvore, int x){
     }
 
     else{
-        //Caso o valor a ser inserido seja menor q a raiz
-        //ele deve ser inserido a esquerda
-        if(x <= arvore->info){
-
-
-            //caso n haja filhos a esquerda um novo deve ser
-            //criado e o novo valor inserido
-            if(arvore->esq == NULL){
-                arvore->esq = geraDisco(x);
-
-                return arvore;
-            }
-
-            //caso haja um filho a esquerda o novo valor
-            //funcao e executada considerando o no a esquerda da
-            //raiz original como nova raiz numa recursão
-            else{
-                arvore->esq = insereAbb(arvore->esq, x);
-
-                return arvore;
-            }
+        if(x < arvore->info){
+            arvore->esq = insereAbb(arvore->esq, x);
         }
-
-        //Caso o valor a ser inserido seja maior q a raiz
-        //ele deve ser inserido a direita
-        if(arvore->info < x){
-
-            if(arvore->dir == NULL){
-                arvore->dir = geraDisco(x);
-
-                return arvore;
-            }
-
-            else{
-                arvore->dir = insereAbb(arvore->dir, x);
-
-                return arvore;
-            }
+        else{
+            arvore->dir = insereAbb(arvore->dir, x);
         }
-
     }
 
-    return NULL;
+    return arvore;
 
 }
 
@@ -141,7 +108,10 @@ int busca(arv* arvore, int x){
 arv* buscaBestFit(arv* arvore, int x){
     if(!arvore_vazia(arvore)){
         //busca o bestfit a esquerda
-        arv* retorna = buscaBestFit(arvore->esq, x);
+        arv* retorna = NULL;
+        if(x < arvore->info){
+            retorna = buscaBestFit(arvore->esq, x);
+        }
 
         //caso n encontre se pergunta se o no atual é
         //o bestFit
@@ -170,38 +140,20 @@ arv* tira_folha(arv* folha){
 }
 
 int maior(arv* arvore){
-    //checa se arvore é vazia
-    if(!arvore_vazia(arvore)){
-        //caso a arvore a direita seja vazia
-        //a raiz atual é a maior de toda a arvore
-        if(arvore_vazia(arvore->dir)){
 
-            return arvore->info;
-        }
-
-        //caso haja mais nos a direita existe algum
-        //valor maior q ainda deve ser retornado
-        else{
-            return maior(arvore->dir);
-        }
+    while(!arvore_vazia(arvore->dir)){
+        arvore = arvore->dir;
     }
 
-    return 0;
+    return arvore->info;
 }
 
 int menor(arv* arvore){
-    if(!arvore_vazia(arvore)){
-
-        if(arvore_vazia(arvore->esq)){
-            return arvore->info;
-        }
-
-        else{
-            return menor(arvore->esq);
-        }
+    while(!arvore_vazia(arvore->esq)){
+        arvore = arvore->esq;
     }
 
-    return 0;
+    return arvore->info;
 }
 
 arv* reestrutura(arv* arvore){
