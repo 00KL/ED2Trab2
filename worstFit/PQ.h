@@ -9,7 +9,6 @@
 typedef struct pq{
     Item* vet;
     int ulti;
-    int max;
 }PQ;
 
 PQ* initPQ(int N);

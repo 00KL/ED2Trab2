@@ -4,7 +4,6 @@ PQ* initPQ(int N){
     PQ* pq = (PQ*)malloc(sizeof(PQ));
     pq->vet = (Item*)malloc(sizeof(Item*)* (N+1));
     pq->ulti = 0;
-    pq->max = N+1;
 
     return pq;
 }
@@ -12,7 +11,7 @@ PQ* initPQ(int N){
 void fixDown(PQ* pq, int pai){
     int filho = pai*2;
     while(filho <= pq->ulti ){
-        if( (filho + 1) <= pq->ulti && pq->vet[filho] < pq->vet[filho + 1]){
+        if( filho < pq->ulti && pq->vet[filho] < pq->vet[filho + 1]){
             filho++;
         }
         if(pq->vet[filho] < pq->vet[pai]){
@@ -75,7 +74,9 @@ Item novoDisco(int alteracao){
 
 void printHeap(PQ* pq){
     for(int i = 1; i <= pq->ulti; i++){
-        printf("%d\n", pq->vet[i]);
+        printf("[%d] ", pq->vet[i]);
     }
+
+    printf("\n\n" );
 
 }

@@ -1,5 +1,5 @@
 all: PQ worst best abb main
-	gcc -o trab2 PQ.o worst.o best.o abb.o main.o 
+	gcc -o trab2 PQ.o worst.o best.o abb.o main.o
 
 PQ:
 	gcc -c worstFit/PQ.c

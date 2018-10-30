@@ -17,12 +17,6 @@ int main(int argc, char *argv[ ]){
         fscanf(arq,"%d", &vet[i]);
     }
 
-    // for(int i = 0; i < N; i++){
-    //     printf("%d\n", vet[i] );
-    // }
-    //
-    // printf("\n\n");
-
     worstFit(N, vet);
     bestFit(N, vet);
 

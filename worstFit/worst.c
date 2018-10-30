@@ -18,10 +18,16 @@ void worstFit(int N, int* vet){
             //caso o novo montante de dados caiba basta atualizaro disco
             inserePQ(pq, aux);
         }
+
+        //printHeap(pq);
+
     }
 
-    printf("Número de discos em uso: %d\n", tamPq(pq));
+    printHeap(pq);
+
+    printf("%d\n", tamPq(pq));
 }
+
 
 void sort(int N, int* vet){
     //Cria heap

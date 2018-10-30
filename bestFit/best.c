@@ -12,7 +12,7 @@ void bestFit(int N, int* vet){
         //printf("\n\n" );
     }
 
-    printf("Quantidade de disco: %d\n", quantDisco(arvore) );
+    printf("%d\n", quantDisco(arvore) );
 
     libera(arvore);
 
