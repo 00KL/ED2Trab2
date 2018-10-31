@@ -11,8 +11,8 @@ int main(int argc, char *argv[ ]){
     }
 
     //leitura de todas as entradas
-    int* vet = (int*)malloc(sizeof(int)*N);
     fscanf(arq, "%d", &N);
+    int* vet = (int*)malloc(sizeof(int)*N);
     for(int i = 0; i < N; i++){
         fscanf(arq,"%d", &vet[i]);
     }
