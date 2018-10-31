@@ -2,7 +2,7 @@
 
 //arvore test <6 <2 <1 < > < > > <4 <3 < > < > > < > > <8 < > < > > >
 
-void bestFit(int N, int* vet){
+int bestFit(int N, int* vet){
     arv* arvore = cria_vazia();
 
     for(int i = 0; i < N; i++){
@@ -12,8 +12,8 @@ void bestFit(int N, int* vet){
         //printf("\n\n" );
     }
 
-    printf("%d\n", quantDisco(arvore) );
-
+    int retorno = quantDisco(arvore);
     libera(arvore);
+    return retorno;
 
 }

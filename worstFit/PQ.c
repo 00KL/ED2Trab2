@@ -9,8 +9,9 @@ PQ* initPQ(int N){
 }
 
 void fixDown(PQ* pq, int pai){
-    int filho = pai*2;
-    while(filho <= pq->ulti ){
+    while(pai*2 <= pq->ulti ){
+
+        int filho = pai*2;
         if( filho < pq->ulti && pq->vet[filho] < pq->vet[filho + 1]){
             filho++;
         }
@@ -19,8 +20,7 @@ void fixDown(PQ* pq, int pai){
         }
         exch(pq->vet[filho], pq->vet[pai]);
 
-        pai = pai*2;
-        filho = pai*2;
+        pai = filho;
     }
 }
 
@@ -79,4 +79,10 @@ void printHeap(PQ* pq){
 
     printf("\n\n" );
 
+}
+
+//tests
+int pegaMax(PQ* pq){
+    if(pq->ulti == 0) return -1;
+    return pq->vet[1];
 }

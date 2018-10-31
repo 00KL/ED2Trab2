@@ -17,8 +17,13 @@ int main(int argc, char *argv[ ]){
         fscanf(arq,"%d", &vet[i]);
     }
 
-    worstFit(N, vet);
-    bestFit(N, vet);
+    printf("%d\n", worstFit(N, vet));
+    printf("%d\n", bestFit(N, vet));
+
+    sort(N, vet);
+
+    printf("%d\n", worstFit(N, vet));
+    printf("%d\n", bestFit(N, vet));
 
 
 

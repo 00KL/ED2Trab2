@@ -32,5 +32,7 @@ Item novoDisco(int alteracao);
 void printHeap(PQ* );
 
 //worstFit
-void worstFit(int N, int* vet);
+int worstFit(int N, int* vet);
 void sort(int N, int* vet);
+
+int pegaMax(PQ*);

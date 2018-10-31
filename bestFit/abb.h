@@ -22,7 +22,7 @@ arv* retira(arv*, int);
 arv* retira_aux(arv* , int );//auxliar
 
 //fit
-void bestFit(int , int*);
+int bestFit(int , int*);
 
 //boooooora
 arv* insereDados(arv* , int);
