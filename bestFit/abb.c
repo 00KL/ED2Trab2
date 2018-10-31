@@ -159,11 +159,14 @@ arv* buscaBestFit(arv* arvore, int x){
 }
 
 /////////////////////////////RETIRA
+//libera folha da memoria e retorna NULL
 arv* tira_folha(arv* folha){
     free(folha);
     return NULL;
 }
 
+//encontra o maior valor de uma arvore binaria de busca
+//e retorna o mesmo
 int maior(arv* arvore){
 
     while(!arvore_vazia(arvore->dir)){
@@ -173,60 +176,78 @@ int maior(arv* arvore){
     return arvore->info;
 }
 
-int menor(arv* arvore){
-    while(!arvore_vazia(arvore->esq)){
-        arvore = arvore->esq;
-    }
-
-    return arvore->info;
-}
-
+//ira trocar a posição mais a direita da arvore a esquerda
+//caso a mesma n seja nula ou a menor arvore a direita
+//caso a mesma n seja nula, assim mantendo a propriedade da arvore
+//binaria de busca
 arv* reestrutura(arv* arvore){
+    //caso a arvore n seja vazia
     if(!arvore_vazia(arvore)){
+        // caso exista uma arvore a esquerda o programa pega o maior valor
+        // da mesma
         if(!arvore_vazia(arvore->esq)){
+
+            //encontra o maior valor da arvore a esquerda
+            // e atribui ele a arvore atual
             arvore->info = maior(arvore->esq);
+            //retira o valor que foi copiado da arvore a esquerda
             arvore->esq = retira_aux(arvore->esq, arvore->info);
 
             return arvore;
         }else{
-            arvore->info = menor(arvore->dir);
-            arvore->dir = retira_aux(arvore->dir, arvore->info);
+            //caso a arvore da esquerda seja vazia basta
+            //considerar o no mais a direita da raiz como nova
+            //raiz e liberar a raiz original, pois a subarvore
+            //adireita respeita as propriedades da arvore binaria
+            //de busca
+            arv* aux = arvore->dir;
+            tira_folha(arvore);
 
-            return arvore;
+            return aux;
         }
     }
 
+    //caso a arvore seja vazia basta retornar NULL
     return NULL;
 }
 
+//retira no da arvore
 arv* retira_aux(arv* arvore, int x){
         if(arvore->info == x){
             //folha
+            //caso o no atual contenha o valor procurado e n tenha
+            //filhos basta tiralo da arvore
             if(arvore->esq == NULL && arvore->dir == NULL){
                 return tira_folha(arvore);
             }
             //no
+            //caso tenha algum filho é necessário reestruturar o mesmo
             else{
                 return reestrutura(arvore);
             }
 
         }
 
+        //caso o valor contido na arvore atual seja menor que o valor
+        //q deve ser retirado ele deve estar na arvore a esquerda
         else if(arvore->info > x){
             arvore->esq = retira_aux(arvore->esq, x);
             return arvore;
         }
 
+        //caso contrario ele deve ser buscado na arvore a esquerda
         else if(arvore->info < x){
             arvore->dir = retira_aux(arvore->dir, x);
             return arvore;
         }
 
+        //se o valor n for encontrado se retorna NULL
         return NULL;
 
 }
 ////////////////////RETIRA
 
+//libera estrutura q armazena a arvore
 void libera(arv* arvore){
     if(!arvore_vazia(arvore)){
         libera(arvore->esq);
@@ -237,6 +258,7 @@ void libera(arv* arvore){
 
 
 //Quantidade de nos na arvore
+//cada no equivale a um disco
 int quantDisco(arv* arvore){
     if(!arvore_vazia(arvore)){
         int cont = quantDisco(arvore->esq);
