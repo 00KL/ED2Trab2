@@ -25,6 +25,7 @@ int main(int argc, char *argv[ ]){
     printf("%d\n", worstFit(N, vet));
     printf("%d\n", bestFit(N, vet));
 
-
+    free(vet);
+    fclose(arq);
 
 }

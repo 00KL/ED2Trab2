@@ -15,8 +15,9 @@ int worstFit(int N, int* vet){
         }
     }
 
-
-    return tamPq(pq);
+    int retorno = tamPq(pq);
+    destruirHeap(pq);
+    return retorno;
 }
 
 
@@ -25,15 +26,13 @@ void sort(int N, int* vet){
     PQ* pq = initPQ(N);
 
     for(int i = 0; i < N; i++){
-        //retira um disco para atualização
-        //printf("[%d] \n", vet[i]);
         inserePQ(pq, vet[i]);
     }
-
-    //printHeap(pq);
 
     for(int i = 0; i < N; i++){
         vet[i] = deletaItem(pq);
     }
+
+    destruirHeap(pq);
 
 }
